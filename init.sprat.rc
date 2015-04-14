@@ -180,6 +180,7 @@ on charger
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
+    start mpdecision
     # Set userspace governor to use only one clock 300Mhz for arm core
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor userspace
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 300000
@@ -230,3 +231,7 @@ service bugreport /system/bin/dumpstate -d -p -B \
 
 service clockwork_proxy /system/bin/ClockworkProxy
     class main
+
+service mpdecision /sbin/mpdecision --avg_comp
+    user root
+    disabled
